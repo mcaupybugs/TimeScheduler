@@ -37,7 +37,7 @@ include "db.php";
                         <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
                     </li>
                     <?php
-                    if (isset($_SESSION['loggedin'])) {
+                    if (!isset($_SESSION['loggedin'])) {
                     ?>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="login.php">Login</a>
@@ -46,7 +46,7 @@ include "db.php";
                     }
                     ?>
                     <?php
-                    if (!isset($_SESSION['loggedin'])) {
+                    if (isset($_SESSION['loggedin'])) {
                     ?>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="logout.php">Logout</a>
