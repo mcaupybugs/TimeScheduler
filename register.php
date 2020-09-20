@@ -4,7 +4,7 @@ include "header.php";
 
 include "db.php";
 session_start();
-
+$info = '';
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
     header("location: index.php");
     exit;
@@ -13,31 +13,22 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 if (isset($_POST["submit"])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-
+    $option = $_POST['option'];
+    $isTeacher = false;
+    if ($option === 'teacher') {
+        $isTeacher = true;
+    }
     $username = mysqli_real_escape_string($connection, $username);
     $password = mysqli_real_escape_string($connection, $password);
-
-    $query = "SELECT * FROM user WHERE username = '{$username}'";
-    $select_user_query = mysqli_query($connection, $query);
-
-    while ($row = mysqli_fetch_array($select_user_query)) {
-        $db_id = $row['user_id'];
-        $db_username = $row['username'];
-        $db_password = $row['password'];
-    }
-    if ($db_password !== $username && $password !== $db_password) {
-        $result = "Invalid username or password";
-        header("location: login.php");
+    $addQuery = "INSERT INTO user (username,password,isTeacher) VALUES ('$username','$password','$isTeacher')";
+    $rr = mysqli_query($connection, $addQuery);
+    if (!$rr) {
+        $info = "Username exists";
     } else {
-
-        //adding values to session
-        $_SESSION['userid'] = $db_id;
-        $_SESSION['username'] = $db_username;
-        $_SESSION['password'] = $db_password;
-        $_SESSION['loggedin'] = true;
-        header("location: index.php");
+        header("Location:index.php");
     }
 }
+
 
 ?>
 
@@ -74,11 +65,17 @@ if (isset($_POST["submit"])) {
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-b-160 p-t-50">
-                <form class="login100-form validate-form" action="login.php" method="POST">
+                <form class="login100-form validate-form" action="register.php" method="POST">
                     <span class="login100-form-title p-b-43">
-                        Account Login
-                    </span>
+                        Create an account<?php
+                                            echo $info;
+                                            ?>
+                        <select name="option">
+                            <option value="teacher">Teacher</option>
+                            <option value="student">Student</option>
 
+                        </select>
+                    </span>
                     <div class="wrap-input100 rs1 validate-input" data-validate="Username is required">
                         <input class="input100" type="text" name="username">
                         <span class="label-input100">Username</span>
@@ -90,15 +87,16 @@ if (isset($_POST["submit"])) {
                         <span class="label-input100">Password</span>
                     </div>
 
+
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn" name="submit">
-                            Sign in
+                            Sign up
                         </button>
                     </div>
 
                     <div class="text-center w-full p-t-23">
-                        <a href="register.php" class="txt1">
-                            Not a user? Register
+                        <a href="login.php" class="txt1">
+                            Already a user? Sign in
                         </a>
                     </div>
                 </form>

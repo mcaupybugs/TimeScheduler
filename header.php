@@ -1,3 +1,6 @@
+<?php
+include "db.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,9 +36,24 @@
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="login.php">Login</a>
-                    </li>
+                    <?php
+                    if (isset($_SESSION['loggedin'])) {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="login.php">Login</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    if (!isset($_SESSION['loggedin'])) {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="logout.php">Logout</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
