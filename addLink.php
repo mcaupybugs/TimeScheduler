@@ -7,16 +7,17 @@ require "header.php";
 
 
 <?php
-
+$result = '';
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     if (isset($_POST['submit'])) {
+
         $subject = $_POST['subject'];
         $link = $_POST['link'];
-        $time = $_SESSION['time'];
-        $addQuery = "INSERT INTO book (book_name,address,user_id) VALUES ('$book_name','$address','$user_id')";
+        $time = $_POST['time'];
+        $addQuery = "INSERT INTO links (subject,link,time) VALUES ('$subject','$link','$time')";
         $rr = mysqli_query($connection, $addQuery);
         if (!$rr) {
-            header("Location:addBook.php");
+            header("Location:addLink.php");
         } else {
             header("Location:index.php");
         }
@@ -32,7 +33,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 <body style="background-color: teal;">
     <div class="container" style="margin-top:100px;">
         <div>
-            <form>
+            <form action="addLink.php" method="POST">
+                <?php
+                echo $result;
+                ?>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Subject</label>
                     <input type="text" name="subject" class="form-control" id="exampleFormControlInput1">
@@ -43,9 +47,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlSelect2">Time</label>
-                    <input type="text" placeholder="10:22" class="form-control" id="exampleFormControlSelect2">
+                    <input type="text" placeholder="10:22" name="time" class="form-control" id="exampleFormControlSelect2">
                 </div>
-                <button class="btn btn-dark" value="submit">Submit</button>
+                <button class="btn btn-dark" name="submit" value="submit">Submit</button>
             </form>
         </div>
     </div>
