@@ -58,6 +58,15 @@ include "db.php";
                     if (isset($_SESSION['loggedin'])) {
                     ?>
                         <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="assignment.php">Assignments</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    if (isset($_SESSION['loggedin'])) {
+                    ?>
+                        <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="addLink.php">Add Class</a>
                         </li>
                     <?php

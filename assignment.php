@@ -18,7 +18,7 @@ if (!isset($_SESSION["loggedin"])) {
 $db_id = $_SESSION['userid'];
 
 
-$query = "SELECT * FROM links;";
+$query = "SELECT * FROM assignment;";
 $result = mysqli_query($connection, $query);
 
 ?>
@@ -29,10 +29,10 @@ $result = mysqli_query($connection, $query);
         <table class="table table-dark">
             <thead>
                 <tr>
-                    <th scope="col">Link ID</th>
+                    <th scope="col">Assignment ID</th>
                     <th scope="col">Subject Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Time</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Due Time</th>
                 </tr>
             </thead>
             <tbody>
