@@ -29,10 +29,10 @@ $result = mysqli_query($connection, $query);
         <table class="table table-dark">
             <thead>
                 <tr>
-                    <th scope="col">Book ID</th>
-                    <th scope="col">Book Name</th>
+                    <th scope="col">Link ID</th>
+                    <th scope="col">Subject Name</th>
                     <th scope="col">Address</th>
-                    <th scope="col">User Owning</th>
+                    <th scope="col">Time</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@ $result = mysqli_query($connection, $query);
 
                         <th scope="row"><?php print_r($row[0]) ?></th>
                         <td><?php print_r($row[1]) ?></td>
-                        <td><?php print_r($row[2]) ?></td>
+                        <td><a href="<?php print_r($row[2]) ?>"><?php print_r($row[2]) ?></a></td>
                         <td><?php print_r($row[3]) ?></td>
                     </tr>
                 <?php
