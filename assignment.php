@@ -26,6 +26,7 @@ $result = mysqli_query($connection, $query);
 <body style="background-color: teal;">
 
     <div class="container" style="margin-top:100px">
+        <a href="addAssignment.php">Add Assignment</a>
         <table class="table table-dark">
             <thead>
                 <tr>
@@ -42,7 +43,7 @@ $result = mysqli_query($connection, $query);
                     <tr>
                         <th scope="row"><?php print_r($row[0]) ?></th>
                         <td><?php print_r($row[1]) ?></td>
-                        <td><a href="<?php print_r($row[2]) ?>"><?php print_r($row[2]) ?></a></td>
+                        <td><?php print_r($row[2]) ?></td>
                         <td><?php print_r($row[3]) ?></td>
                     </tr>
                 <?php
